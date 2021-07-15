@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: dev
+    include: com
+
+
+server:
+  servlet:
+    context-path: /profile
