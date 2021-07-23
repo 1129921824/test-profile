@@ -22,23 +22,25 @@
 			<!--不同环境Profile的唯一id-->
 			<id>dev</id>
 			<properties>
-				<!--profiles.active是自定义的字段（名字随便起），自定义字段可以有多个-->
-				<profiles.active>dev</profiles.active>
-			</properties>
-		</profile>
-		<profile>
-			<id>prod</id>
-			<properties>
-				<profiles.active>prod</profiles.active>
+				<!-- 环境标识，需要与配置文件的名称相对应 -->
+				<!-- activatedProperties为自定义字段 -->
+				<activatedProperty>dev</activatedProperty>
 			</properties>
 			<activation>
+				<!-- 默认环境 -->
 				<activeByDefault>true</activeByDefault>
 			</activation>
 		</profile>
 		<profile>
 			<id>test</id>
 			<properties>
-				<profiles.active>test</profiles.active>
+				<activatedProperty>test</activatedProperty>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<activatedProperty>prod</activatedProperty>
 			</properties>
 		</profile>
 	</profiles>
@@ -63,10 +65,22 @@
 	</dependencies>
 
 	<build>
+		<resources>
+			<resource>
+				<!--配置文件路径 -->
+				<directory>src/main/resources</directory> <!--这里对应项目存放配置文件的目录-->
+				<!--开启filtering功能 -->
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>cn.sunyuqiang.testprofile.TestProfileApplication</mainClass><!--springboot启动类目录-->
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
